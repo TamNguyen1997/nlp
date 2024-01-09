@@ -1,0 +1,28 @@
+plugins {
+  id 'org.springframework.boot' version "3.2.1"
+  id 'java-library'
+  id 'groovy'
+  id 'java'
+  id 'idea'
+  id 'org.unbroken-dome.test-sets' version '4.1.0'
+}
+
+allprojects {
+  apply plugin: 'java-library'
+
+  repositories {
+    mavenCentral()
+  }
+}
+
+dependencies {
+  implementation group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: '3.2.1'
+  implementation group: 'org.modelmapper', name: 'modelmapper', version: '3.1.1'
+
+  implementation group: 'org.apache.opennlp', name: 'opennlp-tools', version: '2.3.1'
+  implementation group: 'org.apache.opennlp', name: 'opennlp-uima', version: '2.3.1'
+
+  compileOnly 'org.projectlombok:lombok:1.18.28'
+  annotationProcessor 'org.projectlombok:lombok:1.18.28'
+
+}
