@@ -41,6 +41,11 @@ public class NerConfiguration {
   }
 
   @Bean
+  public TokenizerME tokenizerME(TokenizerModel tokenizerModel) {
+    return new TokenizerME(tokenizerModel);
+  }
+
+  @Bean
   public TokenizerModel tokenizerModel() throws IOException {
     File file = ResourceUtils.getFile("classpath:model/en-token.bin");
     InputStream inputStream = new FileInputStream(file);
