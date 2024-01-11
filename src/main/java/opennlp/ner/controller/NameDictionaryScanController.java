@@ -1,10 +1,9 @@
 package opennlp.ner.controller;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import opennlp.ner.model.NameScanCommand;
 import opennlp.tools.namefind.DictionaryNameFinder;
-import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.util.Span;
 import org.apache.logging.log4j.util.Strings;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/scan/dictionary")
+@RequestMapping("/dictionary")
 public class NameDictionaryScanController {
 
   private final DictionaryNameFinder dictionaryNameFinder;
@@ -29,7 +28,7 @@ public class NameDictionaryScanController {
   public String scanMovie(@RequestBody NameScanCommand command) {
     String[] tokens = tokenizerME.tokenize(command.getText());
 
-    List<String> result = new ArrayList<>();
+    Set<String> result = new HashSet<>();
 
     Span[] spans = dictionaryNameFinder.find(tokens);
 

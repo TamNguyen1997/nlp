@@ -1,11 +1,11 @@
 package opennlp.ner.controller;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
-import java.util.regex.Pattern;
+import java.util.Set;
 
 import opennlp.ner.model.NameScanCommand;
-import opennlp.tools.namefind.NameFinderME;
 import opennlp.tools.namefind.RegexNameFinder;
 import opennlp.tools.tokenize.TokenizerME;
 import opennlp.tools.util.Span;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/scan/regex")
+@RequestMapping("/regex")
 public class NameRegexScanController {
 
   private final RegexNameFinder regexNameFinder;
@@ -31,7 +31,7 @@ public class NameRegexScanController {
   public String scanName(@RequestBody NameScanCommand command) {
     String[] tokens = tokenizerME.tokenize(command.getText());
 
-    List<String> result = new ArrayList<>();
+    Set<String> result = new HashSet<>();
 
     Span[] spans = regexNameFinder.find(tokens);
 

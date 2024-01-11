@@ -13,24 +13,24 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/default")
-public class NameScanController {
+@RequestMapping("/organisation")
+public class OrganisationScanController {
 
-  private final NameFinderME nameFinderME;
-  private final TokenizerME tokenizerME;
+  private final NameFinderME orgNameFinderME;
+  private final TokenizerME tokenizerModel;
 
-  public NameScanController(NameFinderME nameFinderME, TokenizerME tokenizerME) {
-    this.nameFinderME = nameFinderME;
-    this.tokenizerME = tokenizerME;
+  public OrganisationScanController(NameFinderME orgNameFinderME, TokenizerME tokenizerModel) {
+    this.orgNameFinderME = orgNameFinderME;
+    this.tokenizerModel = tokenizerModel;
   }
 
   @PostMapping(value = "/name")
   public String scanName(@RequestBody NameScanCommand command) {
-    String[] tokens = tokenizerME.tokenize(command.getText());
+    String[] tokens = tokenizerModel.tokenize(command.getText());
 
     Set<String> result = new HashSet<>();
 
-    Span[] spans = nameFinderME.find(tokens);
+    Span[] spans = orgNameFinderME.find(tokens);
 
     for (Span span : spans) {
       result.add(tokens[span.getStart()]);
